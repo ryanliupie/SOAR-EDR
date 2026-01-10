@@ -1,6 +1,6 @@
 # SOAR-EDR
 
-What is SOC? 
+### What is SOC? 
 
 A SOC (Security Operations Center) team serves as a centralized location for monitoring and defending against threats. Some functions include monitoring the environment using a SIEM, isolating/shutting down infected endpoints and removing malware. They often need a constant flow of threat intelligence to ensure they have constant flow of data such as IP addresses, domains, hashes, and other indicators. 
 
