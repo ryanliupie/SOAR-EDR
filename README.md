@@ -20,7 +20,25 @@ SOAR stands for Security Orchestration Automation and Response which is a tool t
 4. <b>Response:</b> This is the remediation & containment portion of the playbook, which may occur at any given time where it can also be automated. 
 <hr>
 
+### What is LimaCharlie? 
+
+It is a an Endpoint Detection and Response (EDR) solution that helps customers have real-time visibility by streaming telemetry data. It also uses a YAML (Yet Another Markup Language) which is a human-readable serialization language used for configuration files and applications where data is stored or transmitted. This allows security teams to make highly sophisticated detections and the ability to track detection login. 
+<hr>
+
+### What is Tines? 
+
+This is a SOAR tool that lets IT and Security teams build automation workflows also called "Stories" with no code/low code drag and drop actions. It integrates with many tools, and in this case, it will integrate with the EDR, LimaCharlie. 
+<hr>
+
 ### Architecture
 
-<img src="images/playbook.jpg" width="600px" alt="balance">
+<img src="images/playbook.jpg" width="600px" alt="playbook-overview">
+<hr>
 
+### Endpoint Agent Installation 
+
+Head over to <a href="https://docs.limacharlie.io/docs/endpoint-agent-installation"> Lima Charlie Endpoint Agent Documentation</a> and the follow the provided steps to install the agent. 
+
+<img src="images/sensor.png" width="800px" alt="sensor-list">
+
+Go to <b>Sensors</b> and you should be able to see your endpoint installed. This agent is important to produce and transmit telemetry on the endpoint (the machine itself).  
