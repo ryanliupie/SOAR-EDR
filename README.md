@@ -32,7 +32,7 @@ This is a SOAR tool that lets IT and Security teams build automation workflows a
 
 ### Architecture
 
-<img src="images/playbook.jpg" width="600px" alt="playbook-overview">
+<img src="images/playbook.jpg" width="1px" alt="playbook-overview">
 <hr>
 
 ### Endpoint Agent Installation 
@@ -42,3 +42,90 @@ Head over to <a href="https://docs.limacharlie.io/docs/endpoint-agent-installati
 <img src="images/sensor.png" width="800px" alt="sensor-list">
 
 Go to <b>Sensors</b> and you should be able to see your endpoint installed. This agent is important to produce and transmit telemetry on the endpoint (the machine itself).  
+<hr>
+
+### Simulate Attack 
+
+on your Windows computer, head over to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have different antivirus software installed, click on `Open App`, then disable `File Shield` or any setting that monitors malicious files. 
+
+If not, click on `Virus & threat protection`, then `Manage Settings`. You want to turn off `real-time protection`. 
+
+![alt text](image.png)
+
+Now head over to <a href="https://github.com/AlessandroZ/LaZagne/releases/tag/v2.4.7"> LaZagne</a> and download the <b>LaZagne.exe</b> file. This is a program that lets you retrieve lost passwords on your local computer. Please do not use this to perform intended malicious actions, only controlled attacks for learning purposes.  
+
+![alt text](image-1.png)
+
+Open <b>Powershell</b>, and head over the directory that holds the file. You can use the `cd` command to do so. You want to run this file by entering `.\LaZagne.exe`. The file will present <b>! BIG BANG !</b> and below it, you will see all the passwords stored locally either in plaintext or as a hash. 
+<hr>
+
+### Check LimaCharlie (EDR)
+
+The agent on the endpoint will pick this up in `TimeLine` hopefully. 
+
+![alt text](image-2.png)
+
+Perfect! the Agent was able to pick up this process running on the local computer. If we click on it, we can see all the <b>event details</b> which is important for making the detection rule. 
+<hr>
+
+### Develop Detection 
+
+In your organization, click on `Automation`, then `D&R Rules`, hit `ADD RULE` at the top right. There are two sections labeled <b>Detect</b> and <b>Response</b>. This is where we are going to write our detection rules. 
+
+![alt text](image-3.png)
+
+<b>Detect:</b> In this section, copy the following text: 
+
+        ```
+    events:
+    - NEW_PROCESS
+    - EXISTING_PROCESS
+    op: and
+    rules:
+    - op: is windows
+    - op: or
+    rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: LaZagne.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: LaZagne
+        ```
+
+<b>Respond:</b> In this section, copy the following text: 
+
+    ```
+    - action: report
+    metadata:
+    author: rl-DFIR
+    description: SOAR-EDR Tool (Detects Lazagne.exe execution)
+    falsepositives:
+      - Damn it MANN
+    level: high
+    tags:
+      - attack.credential_access
+    name: rl- DFIR - Lazagne (SOAR-EDR)
+    ```
+<hr>
+
+Once the information is filled, name the detection `LaZagne.exe Detection`, then click `Create`. We now have a fully functioning detection. In practice, before deploying detections in a production environment, it is important to test it in a testing environment. This is important as it will help identify if any changes need to be made to the detection logic. 
+
+In this case, go back to `Sensors`, your sensor, `Timeline`, find the LaZagne.exe event, click on it, then click on `COPY EVENT`. After copied, go back to `D&R Rules`, scroll down and you will see `TARGET EVENT`. 
+
+![alt text](image-4.png)
+
+Paste the copied event there, then hit `TEST EVENT`. If the detection logic is valid, it should display Match at the bottom. 
+
+![alt text](image-5.png)
+<hr>
+
+### Simulate Attack Again 
+
+Once the detection is made, simulate the attack again and see if LimaCharlie (EDR) will pick it up. 
+ 
+![](image-6.png)
+
+Success! An event showed up in `Detections` and it corresponds to the detection rule that was made. 
