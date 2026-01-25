@@ -48,7 +48,7 @@ Go to <b>Sensors</b> and you should be able to see your endpoint installed. This
 
 on your Windows computer, head over to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have different antivirus software installed, click on `Open App`, then disable `File Shield` or any setting that monitors malicious files. 
 
-If not, click on `Virus & threat protection`, then `Manage Settings`. You want to turn off `real-time protection`. 
+If not, click on `Virus & threat protection`, then `Manage Settings`. You want to turn off `real-time protection`. You can follow this video --> <a href="https://www.youtube.com/watch?v=TjqzYG_01do"> Disable real-time protection</a>. 
 
 ![alt text](image.png)
 
