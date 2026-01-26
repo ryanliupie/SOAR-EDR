@@ -5,7 +5,7 @@
 A SOC (Security Operations Center) team serves as a centralized location for monitoring and defending against threats. Some functions include monitoring the environment using a SIEM, isolating/shutting down infected endpoints and removing malware. They often need a constant flow of threat intelligence to ensure they have constant flow of data such as IP addresses, domains, hashes, and other indicators. 
 
 SOCs face many challenges such as alert fatigue (false positives) and security tools being deployed without integration in an organization. As well as, when SOCs handle security incidents, there are <b>no written step-by-step instructions</b> for how to investigate alerts. This becomes a problem when new analysts come and try to solve problems but do not know where to begin. 
-<hr>
+<
 
 ### What is SOAR? 
 
@@ -18,41 +18,45 @@ SOAR stands for Security Orchestration Automation and Response which is a tool t
 3. <b>Automation:</b> Once all the tools are coordinated through a playbook (predefined list of actions) seen in Orchestration, that playbook, can be automated. This saves a ton of time for a SOC analyst as they do not have to manually click as much anymore. 
 
 4. <b>Response:</b> This is the remediation & containment portion of the playbook, which may occur at any given time where it can also be automated. 
-<hr>
+
 
 ### What is LimaCharlie? 
 
 It is a an Endpoint Detection and Response (EDR) solution that helps customers have real-time visibility by streaming telemetry data. It also uses a YAML (Yet Another Markup Language) which is a human-readable serialization language used for configuration files and applications where data is stored or transmitted. This allows security teams to make highly sophisticated detections and the ability to track detection login. 
-<hr>
+
 
 ### What is Tines? 
 
 This is a SOAR tool that lets IT and Security teams build automation workflows also called "Stories" with no code/low code drag and drop actions. It integrates with many tools, and in this case, it will integrate with the EDR, LimaCharlie. 
-<hr>
+
 
 ### Architecture
 
-<img src="images/playbook.jpg" width="1px" alt="playbook-overview">
+<img src="images/playbook.jpg" width="600px" alt="playbook-overview">
 <hr>
+
+## How to set up LimaCharlie
+
+Before anything, please go to <a href="https://limacharlie.io/"> LimaCharlie's website</a> and sign up either through a username and password or via an Identity Provider (IP), such as Google. 
 
 ### Endpoint Agent Installation 
 
-Head over to <a href="https://docs.limacharlie.io/docs/endpoint-agent-installation"> Lima Charlie Endpoint Agent Documentation</a> and the follow the provided steps to install the agent. 
+Once you have signed up, Head over to <a href="https://docs.limacharlie.io/docs/endpoint-agent-installation"> Lima Charlie Endpoint Agent Documentation</a> and the follow the provided steps to install the endpoint agent. This agent is important to produce and transmit telemetry on the endpoint (the machine itself). 
 
 <img src="images/sensor.png" width="800px" alt="sensor-list">
 
-Go to <b>Sensors</b> and you should be able to see your endpoint installed. This agent is important to produce and transmit telemetry on the endpoint (the machine itself).  
+Go to `Sensors` and you should be able to see your endpoint installed. 
 <hr>
 
 ### Simulate Attack 
 
-on your Windows computer, head over to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have different antivirus software installed, click on `Open App`, then disable `File Shield` or any setting that monitors malicious files. 
+on your Windows computer, go to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have a different antivirus software installed such as <b>Avast</b>, click on `Open App`, then disable `File Shield`. Disable any setting that monitors malicious files. 
 
-If not, click on `Virus & threat protection`, then `Manage Settings`. You want to turn off `real-time protection`. You can follow this video --> <a href="https://www.youtube.com/watch?v=TjqzYG_01do"> Disable real-time protection</a>. 
+If not, click on `Virus & threat protection` --> `Manage Settings`. You want to turn off `real-time protection`. You can follow this video --> <a href="https://www.youtube.com/watch?v=TjqzYG_01do"> Disable real-time protection</a> to help navigate this step. 
 
 ![alt text](image.png)
 
-Now head over to <a href="https://github.com/AlessandroZ/LaZagne/releases/tag/v2.4.7"> LaZagne</a> and download the <b>LaZagne.exe</b> file. This is a program that lets you retrieve lost passwords on your local computer. Please do not use this to perform intended malicious actions, only controlled attacks for learning purposes.  
+Now head over to <a href="https://github.com/AlessandroZ/LaZagne/releases/tag/v2.4.7"> LaZagne</a> and download the <b>LaZagne.exe</b> file. This is a program that lets you retrieve lost passwords on your local computer. ❌ Please do not use this to perform intended malicious actions ❌, only controlled attacks for learning purposes.  
 
 ![alt text](image-1.png)
 
@@ -65,7 +69,7 @@ The agent on the endpoint will pick this up in `TimeLine` hopefully.
 
 ![alt text](image-2.png)
 
-Perfect! the Agent was able to pick up this process running on the local computer. If we click on it, we can see all the <b>event details</b> which is important for making the detection rule. 
+Perfect! the <b>endpoint agent</b> was able to pick up this process running on the local computer. If we click on it, we can see all the <b>event details</b>. These details will be important for making the detection rule. 
 <hr>
 
 ### Develop Detection 
