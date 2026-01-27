@@ -135,7 +135,7 @@ Once the detection is made, simulate the attack again and see if LimaCharlie (ED
 Success! An event showed up in `Detections` and it corresponds to the detection rule that was made. 
 <hr>
 
-## How to set up Slack and Tines Automation
+## Tines and LimaCharlie (Integration)
 
 Go to <a href="https://slack.com/"> Slack.com</a> to setup a new account, and then go ahead and create a `new workspace`. It can be named anything, as long as you know that it is specific to this project. Create a new channel called `alerts`. 
 
