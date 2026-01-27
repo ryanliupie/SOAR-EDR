@@ -133,3 +133,32 @@ Once the detection is made, simulate the attack again and see if LimaCharlie (ED
 ![](image-6.png)
 
 Success! An event showed up in `Detections` and it corresponds to the detection rule that was made. 
+<hr>
+
+## How to set up Slack and Tines Automation
+
+Go to <a href="https://slack.com/"> Slack.com</a> to setup a new account, and then go ahead and create a `new workspace`. It can be named anything, as long as you know that it is specific to this project. Create a new channel called `alerts`. 
+
+![alt text](image-7.png)
+
+Go to <a href= "https://www.tines.com/">Tines.com</a> and set up a new account. This is where the playbook/story will be created. 
+
+Once LimaCharlie produces a detection, Tines will send a message that contains the provided details to the alerts channel. 
+
+![alt text](image-9.png)
+
+Now in your story, drag `WebHook` to the right. This will allows Tines to receive data instantly when events occur in another system. In this case, it will receive detections from LimaCharlie (EDR). Now copy the `webhook URL`. 
+
+![alt text](image-8.png)
+
+Go back to LimaCharlie, and in your organization, click on `Outputs`, then `ADD OUTPUT`. 
+
+There will be 4 steps that will be required. First, click on `Detections`, `Tines`. Name it `SOAR-EDR`, then the `DESTINATION HOST` will be the <b>webhook URL</b>. 
+
+![alt text](image-10.png)
+
+Now, click `SAVE OUTPUT`, lastly, click `ALL DONE`. 
+
+![](image-11.png)
+
+To double check if they are connected, simulate the attack once again, then go to `Events` on the Webhook. If an event occurred, they are connected!
