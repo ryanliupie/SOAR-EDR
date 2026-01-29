@@ -162,3 +162,25 @@ Now, click `SAVE OUTPUT`, lastly, click `ALL DONE`.
 ![](image-11.png)
 
 To double check if they are connected, simulate the attack once again, then go to `Events` on the Webhook. If an event occurred, they are connected!
+
+### Linking Tines and Slack
+
+![alt text](image-12.png)
+
+Go to Slack, click on `More`, `Apps`, in the text bar, search up Tines, and then click `Install`. You will be taken to a website that will help you install the <b>credential</b> needed to link both platforms. Once done, we can move onto the next step. 
+
+![alt text](image-13.png)
+
+In tines, click on `Templates`, search up `Slack`, then click on `Second a message`. 
+
+![alt text](image-14.png)
+
+Go to Slack, choose the `alerts` channel that we created, hit `view channel details`, then copy the `Channel ID`. 
+
+![alt text](image-16.png)
+
+Click on Slack, go to `Build`, and paste the channel ID. After, click on run to make sure that they are linked. 
+
+![](image-15.png)
+
+In the channel, you should see a message from Tines appear! 
