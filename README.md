@@ -162,8 +162,9 @@ Now, click `SAVE OUTPUT`, lastly, click `ALL DONE`.
 ![](image-11.png)
 
 To double check if they are connected, simulate the attack once again, then go to `Events` on the Webhook. If an event occurred, they are connected!
+<hr>
 
-### Linking Tines and Slack
+## Linking Tines and Slack
 
 ![alt text](image-12.png)
 
@@ -184,3 +185,76 @@ Click on Slack, go to `Build`, and paste the channel ID. After, click on run to 
 ![](image-15.png)
 
 In the channel, you should see a message from Tines appear! 
+<hr>
+
+## Setting up Email connection 
+
+![](image-17.png)
+
+Perform the same process. Drag the email icon to the left. Within it, click on `Build` and put anything. We will change what goes into it later. Use a personal email or new email to test if the integration works. 
+<hr>
+
+## User Prompt Setup
+
+![alt text](image-18.png)
+
+CLick on `Tools`, then `Page`. Name the page `User Prompt`, and in the description this is where the user can either isolate the machine or not. You can write `Isolate Machine (Yes/No)`. For the success message, you can put anything such as `You may now close the window.`
+
+![alt text](image-19.png)
+
+Click on `Edit page`. 
+
+![alt text](image-20.png)
+
+Play around with the page, doesn't have to be perfect. This page is what the user will see whether to isolate the machine or not. We will add the details mentioned in the playbook earlier, later on. 
+
+```
+Title: <<detection_lazagne_exe.body.cat>>
+Time (Epoch Format): <<detection_lazagne_exe.body.detect.routing.event_time>>
+Hostname: <<detection_lazagne_exe.body.detect.routing.hostname>>
+IP Address: <<detection_lazagne_exe.body.routing.int_ip>>
+Username: <<detection_lazagne_exe.body.detect.event.USER_NAME>>
+File Path: <<detection_lazagne_exe.body.detect.event.FILE_PATH>>
+Command Line: <<detection_lazagne_exe.body.detect.event.COMMAND_LINE>>
+Sensor ID: <<detection_lazagne_exe.body.detect.routing.sid>>
+Event ID: <<detection_lazagne_exe.body.detect.routing.event_id>>
+Link: <<detection_lazagne_exe.body.link>>
+```
+
+These are the paths that include all the details that a user will see on the page. You can go back to `detections` on LimaCharlie, then look at the event details. There are many to choose from, but make sure to `Copy path` and not `Copy value`. If not, you can simply copy all the paths above. 
+
+
+![alt text](image-21.png)
+
+Once copied, click on `Slack` in Tines, then in the `Message`, simply paste all the content. 
+
+![alt text](image-22.png)
+
+Click on `Test`. Go back to `Slack` and see if the content appears in the `alerts` channel. If it does, it is working! 
+
+![alt text](image-24.png)
+
+  ```HTML
+    <b>Title:</b> <<detection_lazagne_exe.body.cat>>
+    <hr>
+    <br><b>Time (Epoch Format):</b> <<detection_lazagne_exe.body.detect.routing.event_time>>
+    <br><b>Hostname:</b> <<detection_lazagne_exe.body.detect.routing.hostname>>
+    <br><b>IP Address:</b> <<detection_lazagne_exe.body.routing.int_ip>>
+    <br><b>Username:</b> <<detection_lazagne_exe.body.detect.event.USER_NAME>>
+    <br><b>File Path:</b> <<detection_lazagne_exe.body.detect.event.FILE_PATH>>
+    <br><b>Command Line:</b> <<detection_lazagne_exe.body.detect.event.COMMAND_LINE>>
+    <br><b>Sensor ID:</b> <<detection_lazagne_exe.body.detect.routing.sid>>
+    <br><b>Event ID:</b> <<detection_lazagne_exe.body.detect.routing.event_id>>
+    <br><b>Link:</b>
+    <a href="<<detection_lazagne_exe.body.link>>">Detection Link</a>
+  ```
+
+Now, to do this for email, we do the same exact same process. However, here, i did some HTML to make it clearer in the email. You can simply copy and paste the HTML code above and paste it in `Body` text box. 
+
+![alt text](image-25.png)
+
+If it worked, you should receive an email that looks just like this. Now, lets continue building out the User prompt.
+
+![alt text](image-26.png)
+
+Do the same actions, copy and paste the important content into a text box. You can do this by going into `Input fields`, then `Long text`. I also included an image and a separate detection link for organization and clarity. 
