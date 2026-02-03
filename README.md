@@ -32,7 +32,7 @@ This is a SOAR tool that lets IT and Security teams build automation workflows a
 
 ### Architecture
 
-<img src="images/playbook.jpg" width="600px" alt="playbook-overview">
+<img src="images/playbook.jpg" width="600px" alt="playbook_overview">
 <hr>
 
 ## How to set up LimaCharlie
@@ -43,31 +43,29 @@ Before anything, please go to <a href="https://limacharlie.io/"> LimaCharlie's w
 
 Once you have signed up, Head over to <a href="https://docs.limacharlie.io/docs/endpoint-agent-installation"> Lima Charlie Endpoint Agent Documentation</a> and the follow the provided steps to install the endpoint agent. This agent is important to produce and transmit telemetry on the endpoint (the machine itself). 
 
-<img src="images/sensor.png" width="800px" alt="sensor-list">
+<img src="images/sensor.png" width="800px" alt="sensor_list">
 
 Go to `Sensors` and you should be able to see your endpoint installed. 
 <hr>
 
 ### Simulate Attack 
 
-on your Windows computer, go to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have a different antivirus software installed such as <b>Avast</b>, click on `Open App`, then disable `File Shield`. Disable any setting that monitors malicious files. 
+on your Windows computer, go to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have a different antivirus software installed such as <b>Avast</b>, click on `Open App`, then disable `File Shield`. Disable a setting that monitors malicious files. This will let us run a program called <b>LaZagne.exe</b>. 
 
 If not, click on `Virus & threat protection` --> `Manage Settings`. You want to turn off `real-time protection`. You can follow this video --> <a href="https://www.youtube.com/watch?v=TjqzYG_01do"> Disable real-time protection</a> to help navigate this step. 
 
-![alt text](image.png)
+<img src="images/file_shield.png" width="500px" alt="disable_file_shield">
 
 Now head over to <a href="https://github.com/AlessandroZ/LaZagne/releases/tag/v2.4.7"> LaZagne</a> and download the <b>LaZagne.exe</b> file. This is a program that lets you retrieve lost passwords on your local computer. ❌ Please do not use this to perform intended malicious actions ❌, only controlled attacks for learning purposes.  
 
-![alt text](image-1.png)
+<img src="images/lazagne_demo.png" width="600px" alt="lazagne_demo_execution">
+
 
 Open <b>Powershell</b>, and head over the directory that holds the file. You can use the `cd` command to do so. You want to run this file by entering `.\LaZagne.exe`. The file will present <b>! BIG BANG !</b> and below it, you will see all the passwords stored locally either in plaintext or as a hash. 
-<hr>
-
-### Check LimaCharlie (EDR)
 
 The agent on the endpoint will pick this up in `TimeLine` hopefully. 
 
-![alt text](image-2.png)
+<img src="images/timeline_logs.png" width="500px" alt="timeline_logs">
 
 Perfect! the <b>endpoint agent</b> was able to pick up this process running on the local computer. If we click on it, we can see all the <b>event details</b>. These details will be important for making the detection rule. 
 <hr>
