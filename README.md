@@ -257,4 +257,61 @@ If it worked, you should receive an email that looks just like this. Now, lets c
 
 ![alt text](image-26.png)
 
-Do the same actions, copy and paste the important content into a text box. You can do this by going into `Input fields`, then `Long text`. I also included an image and a separate detection link for organization and clarity. 
+Do the same actions, copy and paste the important content into a text box. You can do this by going into `Input fields`, then `Long text`. I also included an image and a separate detection link for organization and clarity. As the user, once you click `No`, we should also be able to send a message to Slack. Let's take a look. 
+
+![alt text](image-27.png)
+
+To do this, click on `Trigger`, then in the rules, click on `user_prompt`, `body`, and then `isolate machine`. Set it equal to `false`. 
+
+![alt text](image-28.png)
+
+To connect with Slack, drag the `Slack` icon. Input the same or different `Channel ID`. Then in the Message, we need the path to the hostname. Simply copy and paste this into that field: `Computer <<detection_lazagne_exe.body.detect.routing.hostname>> please look into.`
+
+![alt text](image-29.png)
+
+Re-run the event. You should see the message appear in Slack! Now that we have completed this portion, we will work on the part when the user clicks "Yes" to isolate the machine. 
+
+ ![alt text](image-30.png)
+
+ Perform the same operation. The only field changing is `false --> true` and the name set to `yes`. 
+
+![alt text](image-31.png)
+
+In order to isolate the machine, we need to tell LimaCharlie to do so. Go to `templates`, search `LimaCharlie`, then select `Isolate Sensor`. Now in the URL field, we can paste `<<detection_lazagne_exe.body.detect.routing.sid>>` or we can go through the tines workflow and use `{} detection_lazagne_exe.body.routing.sid`. 
+
+![alt text](image-32.png)
+
+Now we need a credential in order to connect platforms. Go to LimaCharlie, then go down to `Access Management` then to `REST-API`.
+click on the copy icon next to `Org JWT`
+
+![alt text](image-33.png)
+![alt text](image-344.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+Click in the empty space. Click the `+` icon, then head to `Manual creation`, then to `Text`, then at the bottom right there should be a `Create credential`, select that. You can name and describe the credential anything you wish. Paste the `Org JWT` we copied into the `Value` field. After, type in `*.limacharlie.io` into `URLs and Domains`. This makes sure the credential is only used to that site and its subdomains.  
+
+![alt text](image-37.png)
+
+Click on `Isolate Sensor`, and in the `Headers field`, type in `{}CREDENTIAL_limacharlie`. NOTE, only do so if you named the credential <b>limacharlie</b>. 
+![alt text](image-41.png)
+
+Return to LimaCharlie, click on the sensor, and we should see that the sensor currently has network access. Now lets re-emit the event, click "Yes" to isolate and see what happens! <b>NOTE: YOU WILL BE DISCONNECTED FROM THE INTERNET IF NOT USING A VIRTUAL MACHINE</b>. You can still do this, but make sure to have another device where you can log on into LimaCharlie. 
+
+![alt text](IMG_4463.jpg)
+
+Wow! Look at that, my computer completely disconnected from the internet. I will log into LimaCharlie onto my MacBook and see happens. 
+
+![alt text](image-38.png)
+
+We can see that the sensor is now isolated from the network. If an attacker were to gain access to that sensor, isolating it from the network reduces the chance they can traverse the network. To connect the sensor back to the network, simply click on `Rejoin Network`. The last thing to do, is send a message to Slack that the computer is isolated. I want you to try and do this. 
+
+![alt text](image-40.png)
+
+If you did it correctly, you should have receive a message similar to this. 
+<hr>
+
+## Conclusion
+
+Thank you for following along with this project. I hope you had fun and learnt a bit about how we can orchestrate an EDR with a SOAR platform! 
+
+![alt text](panda.jpg)
