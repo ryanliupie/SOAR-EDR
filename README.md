@@ -318,6 +318,5 @@ If you did it correctly, you should have receive a message similar to this.
 
 Thank you for following along with this project. I hope you had fun and learnt a bit about how we can orchestrate an EDR with a SOAR platform! 
 
-![alt text](panda.jpg)
 
 <img src="images/panda.jpg" width="800px" alt="conclusion">
