@@ -65,7 +65,7 @@ Open <b>Powershell</b>, and head over the directory that holds the file. You can
 
 The agent on the endpoint will pick this up in `TimeLine` hopefully. 
 
-<img src="images/timeline_logs.png" width="500px" alt="timeline_logs">
+<img src="images/timeline_logs.png" width="700px" alt="timeline_logs">
 
 Perfect! the <b>endpoint agent</b> was able to pick up this process running on the local computer. If we click on it, we can see all the <b>event details</b>. These details will be important for making the detection rule. 
 <hr>
@@ -74,7 +74,7 @@ Perfect! the <b>endpoint agent</b> was able to pick up this process running on t
 
 In your organization, click on `Automation`, then `D&R Rules`, hit `ADD RULE` at the top right. There are two sections labeled <b>Detect</b> and <b>Response</b>. This is where we are going to write our detection rules. 
 
-![alt text](image-3.png)
+<img src="images/detect_rule.png" width="700px" alt="detect_response_rules">
 
 <b>Detect:</b> In this section, copy the following text: 
 
@@ -117,18 +117,19 @@ Once the information is filled, name the detection `LaZagne.exe Detection`, then
 
 In this case, go back to `Sensors`, your sensor, `Timeline`, find the LaZagne.exe event, click on it, then click on `COPY EVENT`. After copied, go back to `D&R Rules`, scroll down and you will see `TARGET EVENT`. 
 
-![alt text](image-4.png)
+<img src="images/target_event.png" width="500px" alt="target_event">
 
 Paste the copied event there, then hit `TEST EVENT`. If the detection logic is valid, it should display Match at the bottom. 
 
-![alt text](image-5.png)
+<img src="images/test_event.png" width="200px" alt="test_event">
 <hr>
 
 ### Simulate Attack Again 
 
 Once the detection is made, simulate the attack again and see if LimaCharlie (EDR) will pick it up. 
- 
-![](image-6.png)
+
+
+<img src="images/simulate.png" width="500px" alt="simulate_attack_again">
 
 Success! An event showed up in `Detections` and it corresponds to the detection rule that was made. 
 <hr>
@@ -137,72 +138,74 @@ Success! An event showed up in `Detections` and it corresponds to the detection 
 
 Go to <a href="https://slack.com/"> Slack.com</a> to setup a new account, and then go ahead and create a `new workspace`. It can be named anything, as long as you know that it is specific to this project. Create a new channel called `alerts`. 
 
-![alt text](image-7.png)
+
+<img src="images/slack_integration.png" width="500px" alt="setting_up_slack">
 
 Go to <a href= "https://www.tines.com/">Tines.com</a> and set up a new account. This is where the playbook/story will be created. 
 
 Once LimaCharlie produces a detection, Tines will send a message that contains the provided details to the alerts channel. 
 
-![alt text](image-9.png)
+<img src="images/webhook.png" width="800px" alt="webhook_setup">
 
 Now in your story, drag `WebHook` to the right. This will allows Tines to receive data instantly when events occur in another system. In this case, it will receive detections from LimaCharlie (EDR). Now copy the `webhook URL`. 
 
-![alt text](image-8.png)
+<img src="images/outputs.png" width="600px" alt="outputs">
 
 Go back to LimaCharlie, and in your organization, click on `Outputs`, then `ADD OUTPUT`. 
 
 There will be 4 steps that will be required. First, click on `Detections`, `Tines`. Name it `SOAR-EDR`, then the `DESTINATION HOST` will be the <b>webhook URL</b>. 
 
-![alt text](image-10.png)
+<img src="images/webhook_url.png" width="600px" alt="webhook_url">
 
 Now, click `SAVE OUTPUT`, lastly, click `ALL DONE`. 
 
-![](image-11.png)
+<img src="images/connection_test.png" width="600px" alt="connection_test">
 
 To double check if they are connected, simulate the attack once again, then go to `Events` on the Webhook. If an event occurred, they are connected!
 <hr>
 
 ## Linking Tines and Slack
 
-![alt text](image-12.png)
+<img src="images/tines_slack.png" width="750px" alt="tines_slack_initial_setup">
 
 Go to Slack, click on `More`, `Apps`, in the text bar, search up Tines, and then click `Install`. You will be taken to a website that will help you install the <b>credential</b> needed to link both platforms. Once done, we can move onto the next step. 
 
-![alt text](image-13.png)
+<img src="images/slack_selection.png" width="500px" alt="slack_template">
 
 In tines, click on `Templates`, search up `Slack`, then click on `Second a message`. 
 
-![alt text](image-14.png)
+<img src="images/alerts_channel.png" width="600px" alt="alerts_channel_details">
 
 Go to Slack, choose the `alerts` channel that we created, hit `view channel details`, then copy the `Channel ID`. 
 
-![alt text](image-16.png)
+<img src="images/channel_id.png" width="600px" alt="paste_channel_id">
 
 Click on Slack, go to `Build`, and paste the channel ID. After, click on run to make sure that they are linked. 
 
-![](image-15.png)
+<img src="images/slack_confirmation.png" width="500px" alt=slack_confirmation_message">
 
 In the channel, you should see a message from Tines appear! 
 <hr>
 
 ## Setting up Email connection 
 
-![](image-17.png)
+<img src="images/email_setup.png" width="800px" alt="initial_email_setup">
 
 Perform the same process. Drag the email icon to the left. Within it, click on `Build` and put anything. We will change what goes into it later. Use a personal email or new email to test if the integration works. 
 <hr>
 
 ## User Prompt Setup
 
-![alt text](image-18.png)
+
+<img src="images/prompt_setup.png" width="800px" alt="timeline_logs">
 
 CLick on `Tools`, then `Page`. Name the page `User Prompt`, and in the description this is where the user can either isolate the machine or not. You can write `Isolate Machine (Yes/No)`. For the success message, you can put anything such as `You may now close the window.`
 
-![alt text](image-19.png)
+<img src="images/edit_page.png" width="600px" alt="edit_page">
 
 Click on `Edit page`. 
 
-![alt text](image-20.png)
+<img src="images/page_design.png" width="600px" alt="design_prompt_page">
 
 Play around with the page, doesn't have to be perfect. This page is what the user will see whether to isolate the machine or not. We will add the details mentioned in the playbook earlier, later on. 
 
@@ -221,16 +224,15 @@ Link: <<detection_lazagne_exe.body.link>>
 
 These are the paths that include all the details that a user will see on the page. You can go back to `detections` on LimaCharlie, then look at the event details. There are many to choose from, but make sure to `Copy path` and not `Copy value`. If not, you can simply copy all the paths above. 
 
-
-![alt text](image-21.png)
+<img src="images/detection_details.png" width="600px" alt="detection_details">
 
 Once copied, click on `Slack` in Tines, then in the `Message`, simply paste all the content. 
 
-![alt text](image-22.png)
+<img src="images/test_slack.png" width="600px" alt="test_slack_message">
 
 Click on `Test`. Go back to `Slack` and see if the content appears in the `alerts` channel. If it does, it is working! 
 
-![alt text](image-24.png)
+<img src="images/paste_detection.png" width="600px" alt="paste_detection_in_body">
 
   ```HTML
     <b>Title:</b> <<detection_lazagne_exe.body.cat>>
@@ -249,61 +251,65 @@ Click on `Test`. Go back to `Slack` and see if the content appears in the `alert
 
 Now, to do this for email, we do the same exact same process. However, here, i did some HTML to make it clearer in the email. You can simply copy and paste the HTML code above and paste it in `Body` text box. 
 
-![alt text](image-25.png)
+<img src="images/email_test.png" width="800px" alt="email_message_test">
 
 If it worked, you should receive an email that looks just like this. Now, lets continue building out the User prompt.
 
-![alt text](image-26.png)
+<img src="images/prompt_draft.png" width="600px" alt="prompt_draft">
 
 Do the same actions, copy and paste the important content into a text box. You can do this by going into `Input fields`, then `Long text`. I also included an image and a separate detection link for organization and clarity. As the user, once you click `No`, we should also be able to send a message to Slack. Let's take a look. 
 
-![alt text](image-27.png)
+<img src="images/trigger_false.png" width="800px" alt="set_trigger_to_false">
 
 To do this, click on `Trigger`, then in the rules, click on `user_prompt`, `body`, and then `isolate machine`. Set it equal to `false`. 
 
-![alt text](image-28.png)
+<img src="images/slack_trigger.png" width="600px" alt="slack_connection_trigger">
 
 To connect with Slack, drag the `Slack` icon. Input the same or different `Channel ID`. Then in the Message, we need the path to the hostname. Simply copy and paste this into that field: `Computer <<detection_lazagne_exe.body.detect.routing.hostname>> please look into.`
 
-![alt text](image-29.png)
+<img src="images/slack_message_run.png" width="400px" alt="slack_message_run">
 
 Re-run the event. You should see the message appear in Slack! Now that we have completed this portion, we will work on the part when the user clicks "Yes" to isolate the machine. 
 
- ![alt text](image-30.png)
+<img src="images/trigger_true.png" width="600px" alt="set_trigger_to_true">
 
  Perform the same operation. The only field changing is `false --> true` and the name set to `yes`. 
 
-![alt text](image-31.png)
+
+<img src="images/limacharlie_template.png" width="700px" alt="limacharlie_template">
 
 In order to isolate the machine, we need to tell LimaCharlie to do so. Go to `templates`, search `LimaCharlie`, then select `Isolate Sensor`. Now in the URL field, we can paste `<<detection_lazagne_exe.body.detect.routing.sid>>` or we can go through the tines workflow and use `{} detection_lazagne_exe.body.routing.sid`. 
 
-![alt text](image-32.png)
+<img src="images/api_integration.png" width="600px" alt="api_integration">
 
 Now we need a credential in order to connect platforms. Go to LimaCharlie, then go down to `Access Management` then to `REST-API`.
 click on the copy icon next to `Org JWT`
 
-![alt text](image-33.png)
-![alt text](image-344.png)
-![alt text](image-35.png)
-![alt text](image-36.png)
+<img src="images/api_setup1.png" width="600px" alt="api_setup_step_1">
+<img src="images/api_setup2.png" width="600px" alt="api_setup_step_2">
+<img src="images/api_setup3.png" width="600px" alt="api_setup_step_3">
+<img src="images/api_setup4.png" width="600px" alt="api_setup_step_4">
+
 Click in the empty space. Click the `+` icon, then head to `Manual creation`, then to `Text`, then at the bottom right there should be a `Create credential`, select that. You can name and describe the credential anything you wish. Paste the `Org JWT` we copied into the `Value` field. After, type in `*.limacharlie.io` into `URLs and Domains`. This makes sure the credential is only used to that site and its subdomains.  
 
-![alt text](image-37.png)
+<img src="images/paste_credential.png" width="600px" alt="limacharlie_credential">
 
 Click on `Isolate Sensor`, and in the `Headers field`, type in `{}CREDENTIAL_limacharlie`. NOTE, only do so if you named the credential <b>limacharlie</b>. 
-![alt text](image-41.png)
+
+<img src="images/isolate_machine.png" width="600px" alt="isolate_machine_from_network">
 
 Return to LimaCharlie, click on the sensor, and we should see that the sensor currently has network access. Now lets re-emit the event, click "Yes" to isolate and see what happens! <b>NOTE: YOU WILL BE DISCONNECTED FROM THE INTERNET IF NOT USING A VIRTUAL MACHINE</b>. You can still do this, but make sure to have another device where you can log on into LimaCharlie. 
 
-![alt text](IMG_4463.jpg)
+<img src="images/disconnected.jpg" width="600px" alt="disconnected_from_network">
 
 Wow! Look at that, my computer completely disconnected from the internet. I will log into LimaCharlie onto my MacBook and see happens. 
 
-![alt text](image-38.png)
+
+<img src="images/rejoin_machine.png" width="600px" alt="rejoin_machine_to_network">
 
 We can see that the sensor is now isolated from the network. If an attacker were to gain access to that sensor, isolating it from the network reduces the chance they can traverse the network. To connect the sensor back to the network, simply click on `Rejoin Network`. The last thing to do, is send a message to Slack that the computer is isolated. I want you to try and do this. 
 
-![alt text](image-40.png)
+<img src="images/slack_message.png" width="600px" alt="slack_isolation_message">
 
 If you did it correctly, you should have receive a message similar to this. 
 <hr>
@@ -313,3 +319,5 @@ If you did it correctly, you should have receive a message similar to this.
 Thank you for following along with this project. I hope you had fun and learnt a bit about how we can orchestrate an EDR with a SOAR platform! 
 
 ![alt text](panda.jpg)
+
+<img src="images/panda.jpg" width="800px" alt="conclusion">
