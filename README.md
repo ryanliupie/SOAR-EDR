@@ -50,7 +50,7 @@ Go to `Sensors` and you should be able to see your endpoint installed.
 
 ### Simulate Attack 
 
-on your Windows computer, go to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have a different antivirus software installed such as <b>Avast</b>, click on `Open App`, then disable `File Shield`. Disable a setting that monitors malicious files. This will let us run a program called <b>LaZagne.exe</b>. 
+on your Windows computer, go to `Settings`, `Privacy & Security`, then to `Windows Security`. If you have a different antivirus software installed such as <b>Avast</b>, click on `Open App`, then disable the `File Shield`. If you do not see this setting, try finding a setting that monitors malicious files. This will let us run a program called <b>LaZagne.exe</b>, which lets us retrieve many passwords on a local computer. As you can imagine, in the hands of an attacker, they can do serious harm. 
 
 If not, click on `Virus & threat protection` --> `Manage Settings`. You want to turn off `real-time protection`. You can follow this video --> <a href="https://www.youtube.com/watch?v=TjqzYG_01do"> Disable real-time protection</a> to help navigate this step. 
 
@@ -65,7 +65,7 @@ Open <b>Powershell</b>, and head over the directory that holds the file. You can
 
 The agent on the endpoint will pick this up in `TimeLine` hopefully. 
 
-<img src="images/timeline_logs.png" width="700px" alt="timeline_logs">
+<img src="images/timeline_logs.png" width="800px" alt="timeline_logs">
 
 Perfect! the <b>endpoint agent</b> was able to pick up this process running on the local computer. If we click on it, we can see all the <b>event details</b>. These details will be important for making the detection rule. 
 <hr>
